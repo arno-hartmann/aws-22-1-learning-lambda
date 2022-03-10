@@ -1,5 +1,6 @@
 import json
 import boto3
+import os
 
 snsclient = boto3.client('sns')
 s3client = boto3.client('s3')
@@ -23,5 +24,9 @@ def lambda_handler(event, context):
    
    print(message)
 
-   # Use arn of the sns. Check for same Region!
+   # Use arn of the sns. Check for same Region! 
+   # arn can be defined in "Environment variables" 
+   # therefore "import os" and set xxx as name of variable
+
+   #    snsclient.publish(TargetArn = os.environ["xxx"], Message = message)
    snsclient.publish(TargetArn = "arn:aws:sns:us-west-2:694046024538:drop-file-mail", Message = message)
